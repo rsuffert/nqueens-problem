@@ -23,11 +23,11 @@ public class NQueens {
         return true;
     }
 
-    public void printSolutions() {
-        printSolutions(0);
+    public void printSolutions(boolean stopAfterFirst) {
+        printSolutions(0, stopAfterFirst);
     }
 
-    private void printSolutions(int currentQueen) {
+    private void printSolutions(int currentQueen, boolean stopAfterFirst) {
         for (int col=0; col<x.length; col++) { // for each column (each position in x)
             if (canPlaceQueen(currentQueen, col)) { // if the current queen can be placed in that column (bounding function)
                 x[currentQueen] = col; // assign that column to the queen
@@ -35,8 +35,10 @@ public class NQueens {
                     nSolutions++;
                     printArray(x); // a solution has been found, so print it
                 }
-                else // a solution has not yet been found, but we are still complying with the bounding function
-                    printSolutions(currentQueen+1); // so continue to the next queen
+                else {// a solution has not yet been found, but we are still complying with the bounding function
+                    printSolutions(currentQueen+1, stopAfterFirst); // so continue to the next queen
+                    if (stopAfterFirst && nSolutions > 0) return; // stop searching if a solution has been found and the user requested only one solution
+                }
             }
             // if queen cannot be placed in that column, check the next column
         }   
