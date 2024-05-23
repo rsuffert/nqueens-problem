@@ -7,9 +7,7 @@ public class App {
         int queens = Integer.parseInt(in.nextLine());
         System.out.print("Deseja encontrar apenas uma solução? [S/N]: ");
         boolean oneSolution = in.nextLine().trim().toUpperCase().charAt(0) == 'S';
-        NQueens nq = new NQueens(queens);
-        System.out.println("Solutions: ");
-        nq.printSolutions(oneSolution);
+        NQueens.printSolutions(queens, oneSolution);
         in.close();
     }
 }
